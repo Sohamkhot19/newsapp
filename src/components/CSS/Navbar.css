@@ -1,0 +1,14 @@
+.navbar{
+    background: linear-gradient(to left,#5bcf5b,#5bcf5b);
+}
+.collapse{
+    margin-left: 40px;
+}
+.collapse .nav-item{
+    font-size: 15px;
+    font-weight: 500;
+}
+.navbar-brand{
+    font-size: 25px;
+    font-weight: 500;
+}
