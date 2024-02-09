@@ -1,0 +1,44 @@
+/* Marquee.css */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background: #ecebeb;
+    display: flex;
+    align-items: center;
+  }
+  .marquee-container span{
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    background: #eeeeed;
+    object-fit: cover;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #011f02;
+  }
+  .marquee-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    animation: marquee 20s linear infinite;
+    padding-top: 8px;
+    justify-content: center;
+    z-index: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #011f02;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+ 
+  
+  

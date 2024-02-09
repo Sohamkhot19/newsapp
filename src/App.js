@@ -3,6 +3,7 @@ import './App.css';
 import React, { Component } from 'react'
 import Navbar from './components/Navbar';
 import NewsContainer from './components/NewsContainer';
+import Marquee from './components/Marquee';
 // import {
 //   BrowserRouter as Router,
 //   Routes,
@@ -16,6 +17,7 @@ export default class App extends Component {
     return (
       <>
         <Navbar/>
+        <Marquee/>
         <NewsContainer/>
       </>
       
