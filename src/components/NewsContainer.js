@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
 import News from './News'
 import Spinner from './spinner'
+import PropTypes from 'prop-types'
 export class NewsContainer extends Component {
+  static defaultProps={
+    pagesize:9,
+    country:'in',
+    category:'general'
+  };
+  static propTypes={
+    pagesize:PropTypes.number,
+    country:PropTypes.string,
+    category:PropTypes.string
+  };
   constructor(){
     super();
     this.state={
@@ -11,7 +22,7 @@ export class NewsContainer extends Component {
     }
   }
   async componentDidMount(){
-    let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=a41c1cb39f7e47ad9f737e134ef2178e&page=1&pagesize=${this.props.pagesize}`;
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=a41c1cb39f7e47ad9f737e134ef2178e&page=1&pagesize=${this.props.pagesize}`;
     this.setState({loading:true})
     let data=await fetch(url);
     let parseddata=await data.json();
@@ -25,7 +36,7 @@ export class NewsContainer extends Component {
   nextpage=async()=>{
     if(!(this.state.page+1 > Math.ceil(this.state.totalResults/this.props.pagesize))){
       console.log('next');
-      let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=a41c1cb39f7e47ad9f737e134ef2178e&page=${this.state.page+1}&pagesize=${this.props.pagesize}`;
+      let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=a41c1cb39f7e47ad9f737e134ef2178e&page=${this.state.page+1}&pagesize=${this.props.pagesize}`;
       this.setState({loading:true})
       let data=await fetch(url);
       let parseddata=await data.json();
@@ -40,7 +51,7 @@ export class NewsContainer extends Component {
     
   prevpage=async()=>{
     console.log('prev');
-    let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=a41c1cb39f7e47ad9f737e134ef2178e&page=${this.state.page-1}&pagesize=${this.props.pagesize}`;
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=a41c1cb39f7e47ad9f737e134ef2178e&page=${this.state.page-1}&pagesize=${this.props.pagesize}`;
     this.setState({loading:true})
     let data=await fetch(url);
     let parseddata=await data.json();
