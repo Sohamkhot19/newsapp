@@ -27,7 +27,7 @@
   }
   
   .card-text {
-    max-height: 75px; /* Set a maximum height for the description */
+    max-height: 70px; /* Set a maximum height for the description */
     overflow: hidden;
     text-overflow: ellipsis;
   }

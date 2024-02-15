@@ -1,30 +1,51 @@
-// import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import './CSS/Navbar.css'
-import {Link} from "react-router-dom";
-export class Navbar extends Component {
-//   static propTypes = {}
+import React, { Component, useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import './CSS/Navbar.css';
+
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentTime: ''
+    };
+  }
+
+  startTime = () => {
+    const today = new Date();
+    let h = today.getHours();
+    let m = (today.getMinutes() < 10 ? '0' : '') + today.getMinutes();
+    let s = (today.getSeconds() < 10 ? '0' : '') + today.getSeconds();
+
+    this.setState({ currentTime: `${h}:${m}:${s}` });
+  };
+
+  componentDidMount() {
+    this.intervalId = setInterval(this.startTime, 0);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
 
   render() {
-    // let mode=this.props;
     return (
       <div>
-        <nav className={`navbar navbar-expand-lg bg-body-tertiary`} style={{color:'green'}}>
-  <div className="container-fluid">
-    <Link className="navbar-brand" to="/">Newziee</Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className="nav-link" aria-current="page" to="/General">Home</Link>
+        <nav className={`navbar navbar-expand-lg bg-body-tertiary`} style={{ color: 'green' }}>
+          <div className="container-fluid">
+            <Link className="navbar-brand" to="/" style={{fontSize:'26px',fontWeight:'600'}}>Newziee</Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+          <Link className="nav-link" aria-current="page" to="/General" style={{fontSize:'16px',fontWeight:'700'}}>Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/">About</Link>
+          <Link className="nav-link" to="/" style={{fontSize:'16px',fontWeight:'700'}}>About</Link>
         </li>
         <li className="nav-item dropdown">
-          <Link className="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Link className="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{fontSize:'16px',fontWeight:'700'}}>
             NewsType
           </Link>
           <ul className="dropdown-menu">
@@ -37,18 +58,16 @@ export class Navbar extends Component {
             <li><Link className="dropdown-item" to="/Technology">Technology</Link></li>
           </ul>
         </li>
-        
-      </ul>
-      <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-            <label class="form-check-label" for="flexSwitchCheckDefault">Dark Mode</label>
-        </div>
-    </div>
-  </div>
-</nav>
+              </ul>
+              <span id='txt' style={{ marginLeft: '10px',color:'darkgreen'}}><strong>{new Date().toDateString()}</strong></span>
+              <span id='txt' style={{ marginLeft: '10px',color:'darkgreen'}}><strong>   {this.state.currentTime}</strong></span>
+            </div>
+          </div>
+        </nav>
       </div>
-    )
+    );
   }
 }
 
-export default Navbar
+export default Navbar;
+

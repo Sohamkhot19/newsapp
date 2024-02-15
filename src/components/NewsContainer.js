@@ -6,7 +6,8 @@ export class NewsContainer extends Component {
   static defaultProps={
     pagesize:9,
     country:'in',
-    category:'general'
+    category:'general',
+    imageicon:'../general-logo.png'
   };
   static propTypes={
     pagesize:PropTypes.number,
@@ -64,7 +65,7 @@ export class NewsContainer extends Component {
   render() {
     return (
       <div className='container my-3'>
-        <h2 className='text-center mb-4'>Newziee - Top Headlines</h2>
+        <h2 className='text-center mb-4'><img src={this.props.imageicon} alt='img' height={'55px'} width={'55px'} style={{padding:'5px'}}></img>Newziee - Top Headlines</h2>
         {this.state.loading && <Spinner/>}
         <div className='row'>
           {!this.state.loading && this.state.articles.map((element)=>{
@@ -72,7 +73,8 @@ export class NewsContainer extends Component {
               <News key={element.url} title={element.title} 
               description={element.description}
               imgurl={element.urlToImage}
-              newsurl={element.url}/>           
+              newsurl={element.url}
+              date={element.publishedAt}/>           
             </div>
           })}
           
